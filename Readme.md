@@ -196,3 +196,18 @@ const users = await User.where("age").gt(18).lt(40).limit(2).select("name");
 ```
 const user = await User.findOne({name:"aman"}).populate("bestFriend");
 ```
+
+# Schema Methods
+```
+// add method to every instance we create
+UserSchema.methods.sayHi = function() {
+    console.log('hi, my name is ', this.name); // for every instance
+}
+
+// can only user function express, no arrow function allowed
+UserSchema.statics.findByName = function(name) {
+    return this.where({name: new RegExp(name,'i')});
+}
+const user = await User.findByName("aman").populate("bestFriend");
+console.log(user.sayHi())
+```

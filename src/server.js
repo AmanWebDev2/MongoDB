@@ -31,6 +31,10 @@ const start = async() => {
         
 
         // const user = await User.findById('63f9dcf6a358ce39c7df871f');
+        // console.log(user.sayHi())
+
+        // const user = await User.findByName("aman").populate("bestFriend");
+        // console.log(user)
         // user.bestFriend = '63f9dd0cea062cc17756638f'
         // await user.save();
         // console.log(user);

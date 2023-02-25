@@ -43,6 +43,16 @@ const UserSchema = mongoose.Schema({
 
 });
 
+// add method to every instance we create
+UserSchema.methods.sayHi = function() {
+    console.log('hi, my name is ', this.name); // for every instance
+}
+
+// can only user function express, no arrow function allowed
+UserSchema.statics.findByName = function(name) {
+    return this.where({name: new RegExp(name,'i')});
+}
+
 const User = mongoose.model('User',UserSchema);
 
 module.exports = User;
