@@ -15,9 +15,11 @@ const start = async() => {
         console.log(`server is listening on PORT ${PORT}`)
         connectDb();
 
-        const user = new User({name:"aman",age:21});
-        await user.save();
-        console.log(user)
+        // const user = new User({name:"aman",age:21});
+        // user.name = "rahul";
+
+        // await user.save();
+        // console.log(user)
         
     });
 

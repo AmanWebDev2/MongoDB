@@ -42,16 +42,18 @@ A schema in an actual form. Individual user object from db, you can interact wit
 /model/user.js
 const mongoose = require('mongoose');
 
+const AddressSchema = mongoose.Schema({
+    street: String,
+    city: String
+})
+
 const UserSchema = mongoose.Schema({
-    name: {
-        type: String,
-    },
-    email: {
-        type: String
-    },
-    age: {
-        type: Number
-    }
+    name: String,
+    email: String,
+    age: Number,
+    hobbies: [String],
+    bestFriend: mongoose.SchemaTypes.ObjectId, //reference
+    address: AddressSchema,
 });
 
 const User = mongoose.model('User',UserSchema);
@@ -72,4 +74,63 @@ OR
 ```
 const user = await User.create({name:"aman",age:21});
 console.log(user);
+
+// update
+user.name = "rahul";
+await user.save();
+console.log(user); // name = rahul
 ```
+ 
+
+## Validation
+```
+const UserSchema = mongoose.Schema({
+    name: {
+        type: String,
+    },
+    email: {
+        type: String,
+        minLenght: 10,
+        maxLength: 130,
+        required: true,
+        lowercase: true, // automatically conver to lowercase
+        // uppercase: true
+    },
+    age: {
+        type: Number,
+        min: 1,
+        max: 100,
+        validate: {
+            validator: (val) =>{
+                return val % 2 === 0 
+            },
+            message: (props) => {
+                return `${props.value} is not an event number`
+            }
+        }
+    },
+    createdAt: {
+        type: Date,
+        immutable: true,  
+        default: () => {
+            Date.now()
+        }
+    },
+    updatedAt: {
+        type: Date,
+        immutable: true,
+        default: () => {
+            Date.now()
+        }
+    }
+    hobbies: [String],
+    bestFriend: mongoose.SchemaTypes.ObjectId, //reference
+    address: AddressSchema,
+
+});
+
+```
+
+``` default: () => { } ``` every time we create an user then this default function will call
+``` immutable: true ``` means we cannot change it
+
