@@ -136,24 +136,56 @@ const UserSchema = mongoose.Schema({
 
 ## Query
 
+### findById
 ```
 const user = await User.findById('q3232423');
 ```
+### find
 ```
 const user = await User.find({ name: 'aman' }); 
 ```
+### findOne
 ```
 const user = await User.findOne({ name: 'aman' }); // first matches
 ```
-```
+### Model_Name.exits
+``` 
 const user = await User.exists({ name: 'aman' }); // return boolean 
 ```
+### deleteOne
 ```
  await User.deleteOne({ name: 'aman' }); //firs matches 
 ```
+### deleteMany
 ```
  await User.deleteMany({ age: 18 }); 
 ```
+### where query
 ```
  const user = await User.where("name").equals("aman"); 
+```
+### gt, lt
+
+```
+ const user = await User.where("age").gt(18); 
+```
+```
+// and query
+ const user = await User.where("name").equals("aman").where("age").lt(40); 
+```
+```
+// age between 18 to 48;
+const users = await User.where("age").gt(18).lt(40);
+```
+### limit
+```
+// limit number of users you want
+const users = await User.where("age").gt(18).lt(40).limit(2);
+// fetching 2 results
+```
+### select
+```
+// select -> shows you particular fields onyl
+const users = await User.where("age").gt(18).lt(40).limit(2).select("name");
+// fetching 2 results having name field only
 ```
