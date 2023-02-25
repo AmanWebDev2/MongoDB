@@ -211,3 +211,32 @@ UserSchema.statics.findByName = function(name) {
 const user = await User.findByName("aman").populate("bestFriend");
 console.log(user.sayHi())
 ```
+
+```
+UserSchema.query.byName = function(name) {
+    return this.where({name: new RegExp(name,'i')});
+}
+
+// now we can apply byName as a chaining
+const user = await UserSchema.find().byName("aman");
+console.log(user);
+```
+
+# Virtual
+
+### pre
+```
+// do something before save, validate or remove
+UserSchema.pre("save", function(next) {
+    this.updatedAt = Date.now();
+    next();
+})  
+```
+### post
+```
+// do something after save, validate or remove
+UserSchema.post("save", function(doc,next) {
+    doc.sayHi();
+    next();
+})  
+```
