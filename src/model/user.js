@@ -27,7 +27,10 @@ const UserSchema = mongoose.Schema({
         }
     },
     hobbies: [String], // ["sleeping","reading"]
-    bestFriend:mongoose.SchemaTypes.ObjectId, //reference
+    bestFriend:{
+       type: mongoose.SchemaTypes.ObjectId,
+       ref: 'User'
+    }, //reference
     address: AddressSchema,
     createdAt: {
         type: Date,

@@ -124,7 +124,10 @@ const UserSchema = mongoose.Schema({
         }
     }
     hobbies: [String],
-    bestFriend: mongoose.SchemaTypes.ObjectId, //reference
+    bestFriend: {
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: 'User'
+    },  //reference
     address: AddressSchema,
 
 });
@@ -188,4 +191,8 @@ const users = await User.where("age").gt(18).lt(40).limit(2);
 // select -> shows you particular fields onyl
 const users = await User.where("age").gt(18).lt(40).limit(2).select("name");
 // fetching 2 results having name field only
+```
+### populate
+```
+const user = await User.findOne({name:"aman"}).populate("bestFriend");
 ```
