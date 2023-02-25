@@ -134,3 +134,26 @@ const UserSchema = mongoose.Schema({
 ``` default: () => { } ``` every time we create an user then this default function will call
 ``` immutable: true ``` means we cannot change it
 
+## Query
+
+```
+const user = await User.findById('q3232423');
+```
+```
+const user = await User.find({ name: 'aman' }); 
+```
+```
+const user = await User.findOne({ name: 'aman' }); // first matches
+```
+```
+const user = await User.exists({ name: 'aman' }); // return boolean 
+```
+```
+ await User.deleteOne({ name: 'aman' }); //firs matches 
+```
+```
+ await User.deleteMany({ age: 18 }); 
+```
+```
+ const user = await User.where("name").equals("aman"); 
+```
