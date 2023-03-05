@@ -151,6 +151,10 @@ const user = await User.find({ name: 'aman' });
 ```
 const user = await User.findOne({ name: 'aman' }); // first matches
 ```
+### findOneAndUpdate
+```
+const user = await User.findOneAndUpdate({ name: 'aman' },{name:'new name'}); // first matches
+```
 ### Model_Name.exits
 ``` 
 const user = await User.exists({ name: 'aman' }); // return boolean 
